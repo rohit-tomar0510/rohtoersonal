@@ -1,0 +1,45 @@
+{
+    "server": {
+        "USERS-Ax2009": {
+            "server": "dkrmed465.dkrmed.radiometer.rmg\\dkrmed465",
+            "database": "Ax2009Extract",
+            "query": "SELECT UPPER([USERINFO].[ID]) AS [User ID],[USERINFO].[NAME] AS [User Name],UPPER([USERGROUPLIST].[GROUPID]) AS [Group ID],[USERGROUPINFO].[NAME] AS [Group Name],UPPER([RAD_USERCOMPANYACCESS].[COMPANYID]) AS [Company Access] FROM [Ax2009Extract].[dbo].[USERINFO] LEFT JOIN [Ax2009Extract].[dbo].[USERGROUPLIST] ON [USERINFO].[ID] = [USERGROUPLIST].[USERID] LEFT JOIN [Ax2009Extract].[dbo].[USERGROUPINFO] ON [USERGROUPLIST].[GROUPID] = [USERGROUPINFO].[ID] LEFT JOIN [Ax2009Extract].[dbo].[RAD_USERCOMPANYACCESS] ON [USERINFO].[ID] = [RAD_USERCOMPANYACCESS].[USERID] LEFT JOIN (SELECT DISTINCT [GROUPID], [DOMAINID],[ACCESSTYPE] FROM [Ax2009Extract].[dbo].[ACCESSRIGHTSLIST]) AS a ON [USERGROUPLIST].[GROUPID] = a.[GROUPID] LEFT JOIN (SELECT [ID],[NAME],[ISVIRTUAL] FROM [Ax2009Extract].[dbo].[DATAAREA]) AS b ON [RAD_USERCOMPANYACCESS].[COMPANYID] = b.[ID] INNER JOIN (SELECT [COMPANYID],[DOMAINID] FROM [Ax2009Extract].[dbo].[COMPANYDOMAINLIST]) as c ON [RAD_USERCOMPANYACCESS].[COMPANYID] = c.[COMPANYID] AND a.[DOMAINID] = c.[DOMAINID] WHERE [ENABLE] = 1 AND a.[ACCESSTYPE] != 0 AND b.[ISVIRTUAL] = 0",
+			"username": "",
+			"password": ""
+        },
+        "MANAGERS": {
+            "server": "DKRMED1140.radiometer.rmg",
+            "database": "RMDW_PROD_EDW",
+            "query": "SELECT UPPER([RadiometerID]) AS [User ID],[EmailPrimaryWork] AS [Email],UPPER([ManagerRadiometerID]) AS [Manager ID] FROM [RMDW_PROD_EDW].[dim].[dim_Employee]"
+        },
+		"USERS-Ax2.5": {
+            "server": "dkrmed450.dkrmed.radiometer.rmg",
+            "database": "Ax25Extract",
+            "query": "SELECT UPPER([USERINFO].[ID]) AS [User ID],[USERINFO].[NAME] AS [User Name], UPPER([RAD_USERCOMPANYACCESS].[COMPANY]) AS [Company Access] FROM [Ax25Extract].[dbo].[USERINFO] LEFT JOIN [Ax25Extract].[dbo].[RAD_USERCOMPANYACCESS] ON [USERINFO].[ID] = [Ax25Extract].[dbo].[RAD_USERCOMPANYACCESS].[USERID]  WHERE [ENABLE] = 1",
+			"username": "",
+			"password": "",
+			"permissions1" : "//dkrmed095.dkrmed.radiometer.rmg/citrixsandbox/RMED/SOX_AX_userreview/Automation/data/UserPermission1.txt",
+			"permissions2" : "//dkrmed095.dkrmed.radiometer.rmg/citrixsandbox/RMED/SOX_AX_userreview/Automation/data/UserPermission2.txt"
+        }		
+    },
+    "approvals": {
+        "url": "https://prod-165.westus.logic.azure.com:443/workflows/6684232a057946c593914b61cabad03b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=nQFd0KkgtbUDv04Iat65uhcaojFTKjrT9eQkFourKzg",
+        "header": {
+			"accept": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+			"Connection": "keep-alive",
+			"User-Agent": "Mozilla/5.0"
+        }
+    },
+	"PBI-update": {
+        "url": "https://prod-18.westus.logic.azure.com:443/workflows/2ba5c0a757dc4746ba40f9e3f55f6af8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=yGMkBlxvDGBRRoDsXaiu8Ulm5IGMat0jQwCU-JbARb0",
+        "header": {
+			"accept": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+			"Connection": "keep-alive",
+			"User-Agent": "Mozilla/5.0"
+        }
+	},
+	"path": "//dkrmed095.dkrmed.radiometer.rmg/citrixsandbox/RMED/SOX_AX_userreview/Automation/"
+}
+
